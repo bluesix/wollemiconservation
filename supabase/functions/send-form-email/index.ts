@@ -98,7 +98,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     const emailResponse = await resend.emails.send({
       from: "Melaleuca Reserve <noreply@wollemiconservation.com>",
-      to: ["gus@wollemiconservation.com"],
+      to: ["gus@melaleucaconservation.com"],
       subject: subject,
       html: htmlContent,
       reply_to: data.email,

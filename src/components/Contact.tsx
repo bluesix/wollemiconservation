@@ -99,7 +99,7 @@ export const Contact = () => {
   };
 
   return (
-    <section id="contact" ref={ref} className="section-padding bg-forest-gradient text-primary-foreground">
+    <section id="contact" ref={ref} className="section-padding bg-forest-gradient text-sand-50">
       <div className="container-narrow">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -113,7 +113,7 @@ export const Contact = () => {
           <h2 className="font-display text-4xl md:text-5xl font-semibold mt-3 mb-6">
             Learn More About <span className="text-accent italic">Melaleuca</span>
           </h2>
-          <p className="text-primary-foreground/80 max-w-xl mx-auto leading-relaxed">
+          <p className="text-sand-200 max-w-xl mx-auto leading-relaxed">
             Interested in biodiversity credits, conservation partnerships, or learning more
             about the species at Melaleuca? We'd love to hear from you.
           </p>
@@ -127,20 +127,20 @@ export const Contact = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="grid sm:grid-cols-2 gap-6"
           >
-            <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-6 border border-primary-foreground/10">
+            <div className="bg-sand-50/10 backdrop-blur-sm rounded-xl p-6 border border-sand-50/10">
               <MapPin className="w-8 h-8 text-accent mx-auto mb-3" />
               <h3 className="font-display text-lg font-semibold mb-2 text-center">Location</h3>
-              <p className="text-primary-foreground/70 text-sm text-center">
+              <p className="text-sand-300 text-sm text-center">
                 Melaleuca Trail,<br />
                 Putty, NSW 2330<br />
                 Australia
               </p>
             </div>
 
-            <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-6 border border-primary-foreground/10">
+            <div className="bg-sand-50/10 backdrop-blur-sm rounded-xl p-6 border border-sand-50/10">
               <Mail className="w-8 h-8 text-accent mx-auto mb-3" />
               <h3 className="font-display text-lg font-semibold mb-2 text-center">Enquiries</h3>
-              <p className="text-primary-foreground/70 text-sm text-center">
+              <p className="text-sand-300 text-sm text-center">
                 For biodiversity credit<br />
                 enquiries and partnerships
               </p>
@@ -152,7 +152,7 @@ export const Contact = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-primary-foreground/10"
+            className="bg-sand-50/10 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-sand-50/10"
           >
             {isSubmitted ? (
               <div className="text-center py-8">
@@ -160,14 +160,14 @@ export const Contact = () => {
                   <CheckCircle className="w-8 h-8 text-accent" />
                 </div>
                 <h3 className="font-display text-2xl font-semibold mb-2">Thank You</h3>
-                <p className="text-primary-foreground/70">
+                <p className="text-sand-300">
                   Your message has been sent. We'll get back to you soon.
                 </p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="space-y-2">
-                  <Label htmlFor="contact-name" className="text-primary-foreground">
+                  <Label htmlFor="contact-name" className="text-sand-100">
                     Name *
                   </Label>
                   <Input
@@ -176,7 +176,7 @@ export const Contact = () => {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Your name"
-                    className={`bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50 ${
+                    className={`bg-sand-50/10 border-sand-300/20 text-sand-50 placeholder:text-sand-400 ${
                       errors.name ? "border-red-400" : ""
                     }`}
                   />
@@ -184,7 +184,7 @@ export const Contact = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="contact-email" className="text-primary-foreground">
+                  <Label htmlFor="contact-email" className="text-sand-100">
                     Email *
                   </Label>
                   <Input
@@ -194,7 +194,7 @@ export const Contact = () => {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="you@example.com"
-                    className={`bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50 ${
+                    className={`bg-sand-50/10 border-sand-300/20 text-sand-50 placeholder:text-sand-400 ${
                       errors.email ? "border-red-400" : ""
                     }`}
                   />
@@ -202,7 +202,7 @@ export const Contact = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="contact-message" className="text-primary-foreground">
+                  <Label htmlFor="contact-message" className="text-sand-100">
                     Message *
                   </Label>
                   <Textarea
@@ -212,7 +212,7 @@ export const Contact = () => {
                     onChange={handleChange}
                     placeholder="Tell us how we can help..."
                     rows={4}
-                    className={`bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50 resize-none ${
+                    className={`bg-sand-50/10 border-sand-300/20 text-sand-50 placeholder:text-sand-400 resize-none ${
                       errors.message ? "border-red-400" : ""
                     }`}
                   />

@@ -4,7 +4,9 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { CreditCharts } from "./CreditCharts";
+import { speciesByName } from "@/data/species";
 
 const speciesCredits = [
   { species: "Koala", category: "Species", credits: 1485, subregion: "Wollemi", likeForLike: "Yes", status: "Endangered" },
@@ -138,7 +140,35 @@ export const CreditSummary = () => {
                     <TableBody>
                       {speciesCredits.map((item, index) => (
                         <TableRow key={index}>
-                          <TableCell className="font-medium">{item.species}</TableCell>
+                          <TableCell className="font-medium">
+                            {speciesByName[item.species] ? (
+                              <HoverCard openDelay={200} closeDelay={100}>
+                                <HoverCardTrigger asChild>
+                                  <span className="cursor-default hover:text-primary transition-colors">
+                                    {item.species}
+                                  </span>
+                                </HoverCardTrigger>
+                                <HoverCardContent className="w-72" side="right">
+                                  <div className="flex gap-3">
+                                    <img
+                                      src={speciesByName[item.species].image}
+                                      alt={speciesByName[item.species].name}
+                                      className="w-16 h-16 rounded-lg object-cover flex-shrink-0"
+                                    />
+                                    <div className="flex-1 min-w-0">
+                                      <p className="font-display font-semibold text-sm">{speciesByName[item.species].name}</p>
+                                      <p className="text-xs italic text-muted-foreground">{speciesByName[item.species].scientificName}</p>
+                                    </div>
+                                  </div>
+                                  <p className="text-xs text-muted-foreground mt-2 line-clamp-3 leading-relaxed">
+                                    {speciesByName[item.species].description}
+                                  </p>
+                                </HoverCardContent>
+                              </HoverCard>
+                            ) : (
+                              item.species
+                            )}
+                          </TableCell>
                           <TableCell>
                             <Badge 
                               variant={item.status === "Endangered" ? "destructive" : "secondary"}

@@ -2,148 +2,26 @@ import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { SpeciesCard } from "./SpeciesCard";
 import { SpeciesDetailModal } from "./SpeciesDetailModal";
-import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
-// Import wildlife images
-import koalaImg from "@/assets/wildlife/koala.jpg";
-import wallabyImg from "@/assets/wildlife/wallaby.jpg";
-import pygmyPossumImg from "@/assets/wildlife/pygmy-possum.jpg";
-import gliderImg from "@/assets/wildlife/glider.jpg";
-import owlImg from "@/assets/wildlife/owl.jpg";
-import toadletImg from "@/assets/wildlife/toadlet.jpg";
-import piedBatImg from "@/assets/wildlife/pied-bat.jpg";
-import pomaderrisImg from "@/assets/wildlife/pomaderris.jpg";
-import geebungImg from "@/assets/wildlife/geebung.jpg";
-import southernMyotisImg from "@/assets/wildlife/southern-myotis.jpg";
-import barkingOwlImg from "@/assets/wildlife/barking-owl.jpg";
-import lyrebirdImg from "@/assets/wildlife/lyrebird.jpg";
+import { speciesList } from "@/data/species";
 
 type FilterType = "all" | "animal" | "plant";
-
-const species = [
-  {
-    name: "Koala",
-    scientificName: "Phascolarctos cinereus",
-    status: "Endangered" as const,
-    type: "Animal" as const,
-    description: "Australia's beloved marsupial faces habitat loss across NSW. Melaleuca provides over 485 hectares of prime eucalyptus forest habitat essential for their survival.",
-    image: koalaImg,
-    credit: "Photo: iStock",
-  },
-  {
-    name: "Brush-tailed Rock Wallaby",
-    scientificName: "Petrogale penicillata",
-    status: "Endangered" as const,
-    type: "Animal" as const,
-    description: "Once common across eastern Australia, these agile climbers now survive in isolated populations. The sandstone escarpments at Melaleuca offer perfect habitat.",
-    image: wallabyImg,
-    credit: "Photo: Trail camera, Melaleuca Reserve",
-  },
-  {
-    name: "Eastern Pygmy Possum",
-    scientificName: "Cercartetus nanus",
-    status: "Vulnerable" as const,
-    type: "Animal" as const,
-    description: "Weighing just 15-40 grams, this tiny marsupial is a crucial pollinator. They've been captured on our remote cameras foraging in the banksia heathlands.",
-    image: pygmyPossumImg,
-    credit: "Photo: Trail camera, Melaleuca Reserve",
-  },
-  {
-    name: "Sugar Glider",
-    scientificName: "Petaurus breviceps",
-    status: "Vulnerable" as const,
-    type: "Animal" as const,
-    description: "These remarkable gliding marsupials can soar up to 50 metres between trees. Our old-growth forests provide essential tree hollows for nesting.",
-    image: gliderImg,
-    credit: "Photo: Trail camera, Melaleuca Reserve",
-  },
-  {
-    name: "Sooty Owl",
-    scientificName: "Tyto tenebricosa",
-    status: "Vulnerable" as const,
-    type: "Animal" as const,
-    description: "A secretive nocturnal hunter of the wet forests. Their distinctive calls echo through Melaleuca's gullies during surveys, confirming their presence.",
-    image: owlImg,
-    credit: "Photo: Trail camera, Melaleuca Reserve",
-  },
-  {
-    name: "Large-eared Pied Bat",
-    scientificName: "Chalinolobus dwyeri",
-    status: "Vulnerable" as const,
-    type: "Animal" as const,
-    description: "Roosting in sandstone caves and overhangs, this rare microbat depends on the escarpment habitat. Acoustic surveys detected their ultrasonic calls here.",
-    image: piedBatImg,
-    credit: "Photo: Michael Pennay, Australian Museum (CC BY-NC-ND 2.0)",
-  },
-  {
-    name: "Red-crowned Toadlet",
-    scientificName: "Pseudophryne australis",
-    status: "Vulnerable" as const,
-    type: "Animal" as const,
-    description: "This tiny frog with its distinctive orange crown breeds only in sandstone seeps. Over 276 hectares of suitable habitat has been mapped at Melaleuca.",
-    image: toadletImg,
-  },
-  {
-    name: "Southern Myotis",
-    scientificName: "Myotis macropus",
-    status: "Vulnerable" as const,
-    type: "Animal" as const,
-    description: "Australia's only fishing bat uses its large feet to trawl for prey over water. Found roosting near Wollemi Creek and wetland areas throughout the reserve.",
-    image: southernMyotisImg,
-    credit: "Photo: R & A Williams, Australian Museum",
-  },
-  {
-    name: "Barking Owl",
-    scientificName: "Ninox connivens",
-    status: "Vulnerable" as const,
-    type: "Animal" as const,
-    description: "Named for its distinctive dog-like 'wook-wook' call, this powerful nocturnal predator hunts through Melaleuca's woodland corridors at night.",
-    image: barkingOwlImg,
-    credit: "Photo: Trail camera, Melaleuca Reserve",
-  },
-  {
-    name: "Superb Lyrebird",
-    scientificName: "Menura novaehollandiae",
-    status: "Threatened" as const,
-    type: "Animal" as const,
-    description: "Master mimics of the forest, lyrebirds are regularly captured on trail cameras scratching through leaf litter. Their elaborate tail displays are a highlight of breeding season.",
-    image: lyrebirdImg,
-    credit: "Photo: Trail camera, Melaleuca Reserve",
-  },
-  {
-    name: "Brown Pomaderris",
-    scientificName: "Pomaderris brunnea",
-    status: "Endangered" as const,
-    type: "Plant" as const,
-    description: "Found on sheltered south-facing slopes, this rare shrub produces clusters of small yellow-brown flowers. One of only a few known populations exists here.",
-    image: pomaderrisImg,
-  },
-  {
-    name: "Hairy Geebung",
-    scientificName: "Persoonia hirsuta subsp. evoluta",
-    status: "Endangered" as const,
-    type: "Plant" as const,
-    description: "A distinctive wildflower with yellow tubular blooms and hairy leaves. Over 341 hectares of habitat supports this rare Persoonia subspecies.",
-    image: geebungImg,
-  },
-];
 
 export const Wildlife = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [filter, setFilter] = useState<FilterType>("all");
-  const [selectedSpecies, setSelectedSpecies] = useState<typeof species[0] | null>(null);
+  const [selectedSpecies, setSelectedSpecies] = useState<typeof speciesList[0] | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
 
-  const filteredSpecies = species.filter((s) => {
+  const filteredSpecies = speciesList.filter((s) => {
     if (filter === "all") return true;
     if (filter === "animal") return s.type === "Animal";
     if (filter === "plant") return s.type === "Plant";
     return true;
   });
 
-  const handleSpeciesClick = (speciesItem: typeof species[0]) => {
+  const handleSpeciesClick = (speciesItem: typeof speciesList[0]) => {
     setSelectedSpecies(speciesItem);
     setModalOpen(true);
   };

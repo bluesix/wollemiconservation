@@ -180,7 +180,7 @@ export const InvestorInterest = () => {
       </div>
 
       {/* Content Section */}
-      <div className="bg-sand-50">
+      <div className="bg-background">
         <div className="container-wide py-16 md:py-24">
           {/* Intro Text */}
           <motion.div initial={{

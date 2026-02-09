@@ -5,7 +5,7 @@ import { useRef, useState, useEffect } from "react";
 const stats = [
   { value: 506, suffix: "ha", label: "Protected Land" },
   { value: 10, suffix: "", label: "Threatened Species" },
-  { value: 1, suffix: "M+", label: "Ha Wollemi Wilderness" },
+  { value: 1, suffix: "M+", label: "Acre Wollemi & Yengo Wilderness Corridor" },
   { value: 11373, suffix: "", label: "Biodiversity Credits" },
 ];
 

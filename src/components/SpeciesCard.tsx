@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 interface SpeciesCardProps {
   name: string;
   scientificName: string;
-  status: "Endangered" | "Vulnerable" | "Threatened";
+  status: "Endangered" | "Vulnerable" | "Threatened" | "Protected";
   type: "Animal" | "Plant";
   description: string;
   image: string;
@@ -47,17 +47,17 @@ export const SpeciesCard = ({
         {/* Status Badge */}
         <div className="absolute top-4 left-4">
           <Badge
-            variant={status === "Endangered" ? "destructive" : status === "Threatened" ? "outline" : "secondary"}
+            variant={status === "Endangered" ? "destructive" : status === "Protected" ? "outline" : "secondary"}
             className={`${
               status === "Endangered"
                 ? "bg-destructive/90 hover:bg-destructive"
-                : status === "Threatened"
+                : status === "Protected"
                 ? "bg-primary/80 text-primary-foreground hover:bg-primary"
                 : "bg-gold-500/90 text-accent-foreground hover:bg-gold-500"
             } flex items-center gap-1.5 px-3 py-1`}
           >
-            {status !== "Threatened" && <AlertTriangle className="w-3 h-3" />}
-            {status === "Threatened" && <Info className="w-3 h-3" />}
+            {(status === "Endangered" || status === "Vulnerable" || status === "Threatened") && <AlertTriangle className="w-3 h-3" />}
+            {status === "Protected" && <Info className="w-3 h-3" />}
             {status}
           </Badge>
         </div>
